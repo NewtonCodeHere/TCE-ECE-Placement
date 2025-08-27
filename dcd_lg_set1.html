@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Digital Circuit Design - Set 1</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      line-height: 1.6;
+      text-align: center;
+      transition: background 0.3s, color 0.3s;
+    }
+    h2 { margin-bottom: 20px; }
+
+    .question {
+      display: none;
+      margin-bottom: 20px;
+      font-size: 18px;
+      text-align: left;
+      max-width: 700px;
+      margin: auto;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .active {
+      display: block;
+      animation: fadeIn 0.5s;
+    }
+
+    .q { 
+      font-weight: bold; 
+      margin-bottom: 10px; 
+      color: red;   /* 🔴 Question in red */
+    }
+    .a { 
+      margin-left: 20px; 
+      margin-bottom: 10px; 
+    }
+
+    .navigation { margin-top: 20px; }
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      background: #007bff;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+    button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    button:hover:not(:disabled) {
+      background: #0056b3;
+    }
+
+    /* Light Mode */
+    body.light {
+      background: #f9f9f9;
+      color: #333;
+    }
+    body.light .question {
+      background: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    body.light h2 { color: #333; }
+
+    /* Dark Mode */
+    body.dark {
+      background: #121212;
+      color: #eee;
+    }
+    body.dark .question {
+      background: #1e1e1e;
+      color: #eee;
+      box-shadow: 0 4px 8px rgba(255,255,255,0.1);
+    }
+    body.dark h2 { color: #ffda44; }
+
+    /* Toggle Button */
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 8px 16px;
+      background: #ff9800;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .theme-toggle:hover {
+      background: #e68900;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="dark">
+  <button class="theme-toggle" id="themeBtn">☀️ Light Mode</button>
+
+  <h2>Digital Circuit Design - Set 1</h2>
+
+  <!-- Questions -->
+  <div class="question active">
+    <p class="q">1. 1.	What are the two operating regions of a MOSFET when used as a switch?</p>
+    <p class="a">Cut-off (OFF) and Saturation (ON) regions.</p>
+  </div>
+
+  <div class="question">
+    <p class="q">2. Differentiate between continuous-time and discrete-time signals.</p>
+    <p class="a">Continuous-time: Defined for all t, example: AC mains</p>
+    <p class="a">Discrete-time: Defined only at discrete instants, example: ADC output</p>
+  </div>
+
+  <div class="question">
+    <p class="q">3. What are the main classifications of signals?</p>
+    <p class="a">Deterministic / Random</p>
+    <p class="a">Periodic / Aperiodic</p>
+    <p class="a">Even / Odd</p>
+    <p class="a">Energy / Power</p>
+    <p class="a">Analog / Digital</p>
+  </div>
+
+  <div class="question">
+    <p class="q">4. What is an even signal? Give an example.</p>
+    <p class="a">An even signal satisfies x(t) = x(-t).</p>
+    <p class="a">Example: x(t) = t².</p>
+  </div>
+
+  <div class="question">
+    <p class="q">5. Explain energy and power signals.</p>
+    <p class="a">Energy signals have finite energy.</p>
+    <p class="a">Power signals have finite power over infinite duration.</p>
+  </div>
+
+  <!-- Navigation Buttons -->
+  <div class="navigation">
+    <button id="prevBtn" disabled>⬅ Back</button>
+    <button id="nextBtn">Next ➡</button>
+  </div>
+
+  <script>
+    const questions = document.querySelectorAll(".question");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const themeBtn = document.getElementById("themeBtn");
+    let current = 0;
+
+    function showQuestion(index) {
+      questions.forEach((q, i) => {
+        q.classList.remove("active");
+        if (i === index) q.classList.add("active");
+      });
+      prevBtn.disabled = index === 0;
+      nextBtn.disabled = index === questions.length - 1;
+    }
+
+    prevBtn.addEventListener("click", () => {
+      if (current > 0) {
+        current--;
+        showQuestion(current);
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (current < questions.length - 1) {
+        current++;
+        showQuestion(current);
+      }
+    });
+
+    // Dark/Light Theme Toggle
+    themeBtn.addEventListener("click", () => {
+      if (document.body.classList.contains("dark")) {
+        document.body.classList.remove("dark");
+        document.body.classList.add("light");
+        themeBtn.textContent = "🌙 Dark Mode";
+      } else {
+        document.body.classList.remove("light");
+        document.body.classList.add("dark");
+        themeBtn.textContent = "☀️ Light Mode";
+      }
+    });
+  </script>
+</body>
+</html>
