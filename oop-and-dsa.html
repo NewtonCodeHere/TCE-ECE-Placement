@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Signals and Systems</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            transition: background 0.5s, color 0.5s;
+        }
+        /* Dark Mode (default) */
+        
+        body.dark {
+            background: linear-gradient(135deg, #000000, #001f3f);
+            color: #fff;
+        }
+        /* Bright Mode */
+        
+        body.bright {
+            background: linear-gradient(135deg, #ffffff, #cce7ff);
+            color: #000;
+        }
+        
+        nav {
+            background-color: rgba(17, 17, 17, 0.9);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.5s, color 0.5s;
+        }
+        
+        body.bright nav {
+            background-color: #f0f0f0;
+            color: #000;
+        }
+        
+        .hamburger {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .logo {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .toggle-btn {
+            background: #007bff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .toggle-btn:hover {
+            background: #0056b3;
+        }
+        
+        body.bright .toggle-btn {
+            background: #222;
+            color: white;
+        }
+        
+        main {
+            flex: 1;
+            padding: 40px 20px;
+        }
+        
+        h2 {
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.6rem;
+            color: #00aaff;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .card {
+            background-color: rgba(28, 28, 28, 0.9);
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0, 128, 255, 0.5);
+            border-color: #007bff;
+        }
+        
+        body.bright .card {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            color: #000;
+        }
+        
+        footer {
+            background-color: rgba(17, 17, 17, 0.9);
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            transition: background 0.5s, color 0.5s;
+        }
+        
+        body.bright footer {
+            background-color: #f0f0f0;
+            color: #000;
+        }
+    </style>
+</head>
+
+<body class="dark">
+
+    <nav>
+        <div class="logo">OOP and DSA</div>
+        <div>
+            <button class="toggle-btn" onclick="toggleMode()">Bright Mode</button>
+            <span class="hamburger">&#9776;</span>
+        </div>
+    </nav>
+
+    <main>
+        <h2>Topics in OOP and DSA</h2>
+        <div class="grid">
+            <a href="oop-basics.html" class="card">
+                <h3>Basic C and Java Programming </h3>
+            </a>
+            <a href="oop-obj.html" class="card">
+                <h3>Object, Class, Method</h3>
+            </a>
+            <a href="oop-inheritance.html" class="card">
+                <h3>Inheritance, Encapsulation</h3>
+            </a>
+            <a href="oop-concepts.html" class="card">
+                <h3>Polymorphism: Method Overloading, Method Overriding </h3>
+            </a>
+            <a href="oop-abst.html" class="card">
+                <h3>Abstract Class and Interfaces</h3>
+            </a>
+            <a href="oop-dmds.html" class="card">
+                <h3>Dynamic Method Dispatch and Dynamic Programming</h3>
+            </a>
+            <a href="oop-stack.html" class="card">
+                <h3>DSA General Theoretical Concepts, Stacks, Queues</h3>
+            </a>
+            <a href="oop-ll.html" class="card">
+                <h3>Linked List: Singly, Doubly, and Circular</h3>
+            </a>
+            <a href="oop-pqheap.html" class="card">
+                <h3>Priority Queues, Binary Heaps</h3>
+            </a>
+            <a href="oop-hash.html" class="card">
+                <h3>Hash Tables, Hash Functions, Collision Resolution, Rehashing</h3>
+            </a>
+            <a href="oop-nlds.html" class="card">
+                <h3>Nonlinear Data Structures: Binary Tree, Tree Traversal, Binary Search Tree (BST), AVL Tree</h3>
+            </a>
+            <a href="oop-algo.html" class="card">
+                <h3>Types of Algorithms: Divide and Conquer, Greedy, Backtracking</h3>
+            </a>
+            <a href="oop-basic_algo.html" class="card">
+                <h3>Basic Algorithms: Sorting Algorithms, Shortest Path Algorithms and Minimum Spanning Tree Algorithms</h3>
+            </a>
+            <a href="oop-graph.html" class="card">
+                <h3>Graph Algorithms: Graph Terminologies, DFS, BFS, Topological Sorting</h3>
+            </a>
+                      
+            
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2027 Batch Placement Portal | All Rights Reserved
+    </footer>
+
+    <script>
+        function toggleMode() {
+            const body = document.body;
+            const btn = document.querySelector(".toggle-btn");
+
+            if (body.classList.contains("dark")) {
+                body.classList.remove("dark");
+                body.classList.add("bright");
+                btn.textContent = "Dark Mode";
+            } else {
+                body.classList.remove("bright");
+                body.classList.add("dark");
+                btn.textContent = "Bright Mode";
+            }
+        }
+    </script>
+
+</body>
+
+</html>

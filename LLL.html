@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>OOP AND DSA </title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            line-height: 1.6;
+            background: linear-gradient(270deg, #ff4b4b, #ff9800, #ffda44);
+            background-size: 600% 600%;
+            animation: bgAnimation 12s ease infinite;
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        h2 {
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+        /* Question container */
+        
+        .q-container {
+            max-width: 700px;
+            margin: 0 auto 25px auto;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .q-container:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+        /* Question button */
+        
+        .q-btn {
+            width: 100%;
+            padding: 14px 18px;
+            border: none;
+            background: rgba(229, 57, 53, 0.85);
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 500;
+            text-align: left;
+            transition: background 0.3s, transform 0.2s;
+            margin-bottom: 15px;
+        }
+        
+        .q-btn:hover {
+            background: rgba(183, 28, 28, 0.9);
+            transform: translateY(-2px);
+        }
+        /* Answer box */
+        
+        .answer-box {
+            display: none;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #fff;
+            animation: fadeIn 0.5s;
+        }
+        
+        .answer-box.active {
+            display: block;
+        }
+        /* Light Mode */
+        
+        body.light {
+            background: linear-gradient(270deg, #ffecd2, #fcb69f, #ffe29f);
+            background-size: 600% 600%;
+            animation: bgAnimationLight 12s ease infinite;
+            color: #333;
+        }
+        
+        body.light h2 {
+            color: #222;
+        }
+        
+        body.light .q-container {
+            background: rgba(255, 255, 255, 0.6);
+            color: #000;
+        }
+        
+        body.light .answer-box {
+            background: rgba(255, 255, 255, 0.8);
+            color: #000;
+        }
+        /* Dark Mode */
+        
+        body.dark {
+            background: linear-gradient(270deg, #000000, #8b0000, #000000);
+            background-size: 400% 400%;
+            animation: bgAnimationDark 10s ease infinite;
+            color: #eee;
+        }
+        
+        body.dark h2 {
+            color: #fff;
+        }
+        
+        body.dark .q-container {
+            background: rgba(30, 30, 30, 0.6);
+        }
+        
+        body.dark .answer-box {
+            background: rgba(50, 50, 50, 0.8);
+        }
+        /* Animations */
+        
+        @keyframes bgAnimationLight {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        @keyframes bgAnimationDark {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        /* Theme Toggle Button */
+        
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 18px;
+            background: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+            z-index: 1000;
+        }
+        
+        .theme-toggle:hover {
+            background: #e64a19;
+            transform: scale(1.05);
+        }
+        /* Animations */
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bgAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark">
+    <button class="theme-toggle" id="themeBtn">☀️ Light Mode</button>
+    <h2>SINGLY LINKED LIST</h2>
+
+   <!-- Q&A blocks -->
+<!-- Linear (Singly) Linked List -->
+
+<div class="q-container">
+  <button class="q-btn" onclick="toggleAnswer(0)">Q1: What is a singly linked list?</button>
+  <div class="answer-box">
+    <p><b>Answer:</b> A singly linked list is a linear data structure where each node contains data and a pointer to the next node in the sequence.</p>
+  </div>
+</div>
+<div class="q-container">
+  <button class="q-btn" onclick="toggleAnswer(1)">Q2: What are the basic operations on a singly linked list?</button>
+  <div class="answer-box">
+    <p><b>Answer:</b> Basic operations include insertion, deletion, traversal, and searching.</p>
+  </div>
+</div>
+<div class="q-container">
+  <button class="q-btn" onclick="toggleAnswer(2)">Q3: What is the time complexity of inserting at the beginning of a singly linked list?</button>
+  <div class="answer-box">
+    <p><b>Answer:</b> O(1) since only the head pointer needs to be updated.</p>
+  </div>
+</div>
+<div class="q-container">
+  <button class="q-btn" onclick="toggleAnswer(3)">Q4: What is the drawback of a singly linked list compared to an array?</button>
+  <div class="answer-box">
+    <p><b>Answer:</b> It does not allow direct access to elements by index; traversal is required.</p>
+  </div>
+</div>
+<div class="q-container">
+  <button class="q-btn" onclick="toggleAnswer(4)">Q5: How do you delete the last node in a singly linked list?</button>
+  <div class="answer-box">
+    <p><b>Answer:</b> Traverse the list until the second-last node and set its next pointer to NULL.</p>
+  </div>
+</div>
+<div class="q-container">
+  <button class="q-btn" onclick="toggleAnswer(5)">Q6: What is the time complexity of searching an element in a singly linked list?</button>
+  <div class="answer-box">
+    <p><b>Answer:</b> O(n), as traversal may be required for all nodes.</p>
+  </div>
+</div>
+<div class="q-container">
+  <button class="q-btn" onclick="toggleAnswer(6)">Q7: How do you reverse a singly linked list?</button>
+  <div class="answer-box">
+    <p><b>Answer:</b> By iterating through the list and changing the next pointers of nodes to point to the previous node.</p>
+  </div>
+</div>
+<div class="q-container">
+  <button class="q-btn" onclick="toggleAnswer(7)">Q8: How do you find the middle node of a linked list in one traversal?</button>
+  <div class="answer-box">
+    <p><b>Answer:</b> Use two pointers: a slow pointer moves one step, and a fast pointer moves two steps. When the fast pointer reaches the end, the slow pointer is at the middle.</p>
+  </div>
+</div>
+<div class="q-container">
+  <button class="q-btn" onclick="toggleAnswer(8)">Q9: How do you check if two linked lists intersect?</button>
+  <div class="answer-box">
+    <p><b>Answer:</b> Traverse both lists to their ends. If the last nodes are the same (by reference), they intersect.</p>
+  </div>
+</div>
+<div class="q-container">
+  <button class="q-btn" onclick="toggleAnswer(9)">Q10: How do you implement a stack using a linked list?</button>
+  <div class="answer-box">
+    <p><b>Answer:</b> By inserting and deleting nodes only at the head of the list.</p>
+  </div>
+</div>
+<div class="q-container">
+  <button class="q-btn" onclick="toggleAnswer(10)">Q11: How do you implement a queue using a linked list?</button>
+  <div class="answer-box">
+    <p><b>Answer:</b> By inserting at the tail and deleting from the head of the list.</p>
+  </div>
+</div>
+<div class="q-container">
+  <button class="q-btn" onclick="toggleAnswer(11)">Q12: How do you detect and remove a loop in a linked list?</button>
+  <div class="answer-box">
+    <p><b>Answer:</b> Detect using Floyd’s cycle detection algorithm, then reset one pointer to head and move both one step at a time until they meet to remove the loop.</p>
+  </div>
+</div>
+<div class="q-container">
+  <button class="q-btn" onclick="toggleAnswer(12)">Q13: What is the space complexity of a linked list with n nodes?</button>
+  <div class="answer-box">
+    <p><b>Answer:</b> O(n), since each node requires memory for data and a pointer.</p>
+  </div>
+</div>
+<div class="q-container">
+  <button class="q-btn" onclick="toggleAnswer(13)">Q14: What is the advantage of linked lists in insertion and deletion?</button>
+  <div class="answer-box">
+    <p><b>Answer:</b> Insertions and deletions can be done in O(1) time if the pointer to the node is known.</p>
+  </div>
+</div>
+<div class="q-container">
+  <button class="q-btn" onclick="toggleAnswer(14)">Q15: Can a linked list be used to implement adjacency lists in a graph?</button>
+  <div class="answer-box">
+    <p><b>Answer:</b> Yes, linked lists are commonly used for adjacency list representation of graphs.</p>
+  </div>
+</div>
+<div class="q-container">
+  <button class="q-btn" onclick="toggleAnswer(15)">Q16: How do you merge two sorted linked lists into a single sorted linked list?</button>
+  <div class="answer-box">
+    <p><b>Answer:</b> By iterating through both lists simultaneously and picking the smaller node each time.</p>
+  </div>
+</div>
+<div class="q-container">
+  <button class="q-btn" onclick="toggleAnswer(16)">Q17: How do you delete a node in a singly linked list if only the pointer to that node is given (not the head)?</button>
+  <div class="answer-box">
+    <p><b>Answer:</b> Copy data from the next node into the current node and delete the next node.</p>
+  </div>
+</div>
+<div class="q-container">
+  <button class="q-btn" onclick="toggleAnswer(17)">Q18: What is the best data structure to represent polynomial expressions?</button>
+  <div class="answer-box">
+    <p><b>Answer:</b> A linked list, where each node stores a coefficient and an exponent.</p>
+  </div>
+</div>
+<div class="q-container">
+  <button class="q-btn" onclick="toggleAnswer(18)">Q19: How do you find the nth node from the end of a linked list?</button>
+  <div class="answer-box">
+    <p><b>Answer:</b> Use two pointers: move one pointer n steps ahead, then move both until the first reaches the end; the second pointer will point to the nth node from the end.</p>
+  </div>
+</div>
+
+
+
+    <script>
+        const answers = document.querySelectorAll(".answer-box");
+        const themeBtn = document.getElementById("themeBtn");
+
+        function toggleAnswer(index) {
+            answers[index].classList.toggle("active");
+        }
+
+        // Dark/Light Theme Toggle
+        themeBtn.addEventListener("click", () => {
+            if (document.body.classList.contains("dark")) {
+                document.body.classList.remove("dark");
+                document.body.classList.add("light");
+                themeBtn.textContent = "🌙 Dark Mode";
+            } else {
+                document.body.classList.remove("light");
+                document.body.classList.add("dark");
+                themeBtn.textContent = "☀️ Light Mode";
+            }
+        });
+    </script>
+</body>
+
+</html>
+

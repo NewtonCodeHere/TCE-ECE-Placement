@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Signals and Systems - Set 1</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            line-height: 1.6;
+            background: linear-gradient(270deg, #ff4b4b, #ff9800, #ffda44);
+            background-size: 600% 600%;
+            animation: bgAnimation 12s ease infinite;
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        h2 {
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+        /* Question container */
+        
+        .q-container {
+            max-width: 700px;
+            margin: 0 auto 25px auto;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .q-container:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+        /* Question button */
+        
+        .q-btn {
+            width: 100%;
+            padding: 14px 18px;
+            border: none;
+            background: rgba(229, 57, 53, 0.85);
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 500;
+            text-align: left;
+            transition: background 0.3s, transform 0.2s;
+            margin-bottom: 15px;
+        }
+        
+        .q-btn:hover {
+            background: rgba(183, 28, 28, 0.9);
+            transform: translateY(-2px);
+        }
+        /* Answer box */
+        
+        .answer-box {
+            display: none;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #fff;
+            animation: fadeIn 0.5s;
+        }
+        
+        .answer-box.active {
+            display: block;
+        }
+        /* Light Mode */
+        
+        body.light {
+            background: linear-gradient(270deg, #ffecd2, #fcb69f, #ffe29f);
+            background-size: 600% 600%;
+            animation: bgAnimationLight 12s ease infinite;
+            color: #333;
+        }
+        
+        body.light h2 {
+            color: #222;
+        }
+        
+        body.light .q-container {
+            background: rgba(255, 255, 255, 0.6);
+            color: #000;
+        }
+        
+        body.light .answer-box {
+            background: rgba(255, 255, 255, 0.8);
+            color: #000;
+        }
+        /* Dark Mode */
+        
+        body.dark {
+            background: linear-gradient(270deg, #000000, #8b0000, #000000);
+            background-size: 400% 400%;
+            animation: bgAnimationDark 10s ease infinite;
+            color: #eee;
+        }
+        
+        body.dark h2 {
+            color: #fff;
+        }
+        
+        body.dark .q-container {
+            background: rgba(30, 30, 30, 0.6);
+        }
+        
+        body.dark .answer-box {
+            background: rgba(50, 50, 50, 0.8);
+        }
+        /* Animations */
+        
+        @keyframes bgAnimationLight {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        @keyframes bgAnimationDark {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        /* Theme Toggle Button */
+        
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 18px;
+            background: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+            z-index: 1000;
+        }
+        
+        .theme-toggle:hover {
+            background: #e64a19;
+            transform: scale(1.05);
+        }
+        /* Animations */
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bgAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark">
+    <button class="theme-toggle" id="themeBtn">☀️ Light Mode</button>
+    <h2>Small Signal Analysis  - Set 3</h2>
+
+    <!-- Q&A blocks -->
+    <div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(0)">Q1: Derive voltage gain, input resistance, and output resistance of a CE amplifier.</button>
+    <div class="answer-box">
+        <p><b>Answer:</b> A_v ≈ −g_m(R_C || r_o), R_in ≈ r_π || R_B, R_out ≈ R_C || r_o. With emitter bypass capacitor, gain is maximized.</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(1)">Q2: Why does the CE amplifier provide phase inversion?</button>
+    <div class="answer-box">
+        <p><b>Answer:</b> An increase in base voltage increases I_C, which increases the voltage drop across R_C, lowering V_C. Thus, output is 180° out of phase with input.</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(2)">Q3: Compare voltage gain and input resistance of CE, CB, and CC amplifiers.</button>
+    <div class="answer-box">
+        <p><b>Answer:</b> CE: High gain, moderate input resistance, inverting. CB: High gain, very low input resistance, non-inverting. CC: Unity gain, very high input resistance, low output resistance (buffer).</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(3)">Q4: Derive voltage gain of a CS amplifier with source resistance.</button>
+    <div class="answer-box">
+        <p><b>Answer:</b> Effective gain: A_v ≈ −(g_m / (1 + g_mR_S))(R_D || r_o). Source resistance introduces degeneration, reducing gain.</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(4)">Q5: Why is small-signal approximation valid only near the Q-point?</button>
+    <div class="answer-box">
+        <p><b>Answer:</b> Small-signal model linearizes device I–V characteristics around the Q-point using first-order expansion. Large excursions deviate, causing distortion, so approximation holds only near Q-point.</p>
+    </div>
+</div>
+
+<script>
+    const answers = document.querySelectorAll(".answer-box");
+    const themeBtn = document.getElementById("themeBtn");
+
+    function toggleAnswer(index) {
+        answers[index].classList.toggle("active");
+    }
+
+    themeBtn.addEventListener("click", () => {
+        if (document.body.classList.contains("dark")) {
+            document.body.classList.remove("dark");
+            document.body.classList.add("light");
+            themeBtn.textContent = "🌙 Dark Mode";
+        } else {
+            document.body.classList.remove("light");
+            document.body.classList.add("dark");
+            themeBtn.textContent = "☀️ Light Mode";
+        }
+    });
+</script>
+
+</body>
+
+</html>

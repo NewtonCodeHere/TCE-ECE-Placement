@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Signals and Systems</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            transition: background 0.5s, color 0.5s;
+        }
+        /* Dark Mode (default) */
+        
+        body.dark {
+            background: linear-gradient(135deg, #000000, #001f3f);
+            color: #fff;
+        }
+        /* Bright Mode */
+        
+        body.bright {
+            background: linear-gradient(135deg, #ffffff, #cce7ff);
+            color: #000;
+        }
+        
+        nav {
+            background-color: rgba(17, 17, 17, 0.9);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.5s, color 0.5s;
+        }
+        
+        body.bright nav {
+            background-color: #f0f0f0;
+            color: #000;
+        }
+        
+        .hamburger {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .logo {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .toggle-btn {
+            background: #007bff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .toggle-btn:hover {
+            background: #0056b3;
+        }
+        
+        body.bright .toggle-btn {
+            background: #222;
+            color: white;
+        }
+        
+        main {
+            flex: 1;
+            padding: 40px 20px;
+        }
+        
+        h2 {
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.6rem;
+            color: #00aaff;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .card {
+            background-color: rgba(28, 28, 28, 0.9);
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0, 128, 255, 0.5);
+            border-color: #007bff;
+        }
+        
+        body.bright .card {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            color: #000;
+        }
+        
+        footer {
+            background-color: rgba(17, 17, 17, 0.9);
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            transition: background 0.5s, color 0.5s;
+        }
+        
+        body.bright footer {
+            background-color: #f0f0f0;
+            color: #000;
+        }
+    </style>
+</head>
+
+<body class="dark">
+
+    <nav>
+        <div class="logo">Computer Architecture and Embedded Systems</div>
+        <div>
+            <button class="toggle-btn" onclick="toggleMode()">Bright Mode</button>
+            <span class="hamburger">&#9776;</span>
+        </div>
+    </nav>
+
+    <main>
+        <h2>Topics in Computer Architecture and Embedded Systems</h2>
+        <div class="grid">
+
+            <a href="comparch-cs.html" class="card">
+                <h3>Computer system </h3>
+            </a>
+            <a href="comparch-cpu.html" class="card">
+                <h3>Central processing unit and computer hardware</h3>
+            </a>
+            <a href="comparch-8086.html" class="card">
+                <h3>8086-processor </h3>
+            </a>
+            <a href="comparch-mips32.html" class="card">
+                <h3>Mips 32 architecture </h3>
+            </a>
+            <a href="comparch-multicore.html" class="card">
+                <h3>Multicore architecture </h3>
+            </a>
+            <a href="comparch-emdc.html" class="card">
+                <h3>Embedded C programming </h3>
+            </a>
+            <a href="comparch-arm.html" class="card">
+                <h3>Arm Microcontroller</h3>
+            </a>
+            <a href="comparch-arm-interfacing.html" class="card">
+                <h3>Arm embedded system and interfacing </h3>
+            </a>
+            <a href="comparch-cmperipheral.html" class="card">
+                <h3>Communication peripheral</h3>
+            </a>
+
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2027 Batch Placement Portal | All Rights Reserved
+    </footer>
+
+    <script>
+        function toggleMode() {
+            const body = document.body;
+            const btn = document.querySelector(".toggle-btn");
+
+            if (body.classList.contains("dark")) {
+                body.classList.remove("dark");
+                body.classList.add("bright");
+                btn.textContent = "Dark Mode";
+            } else {
+                body.classList.remove("bright");
+                body.classList.add("dark");
+                btn.textContent = "Bright Mode";
+            }
+        }
+    </script>
+
+</body>
+
+</html>

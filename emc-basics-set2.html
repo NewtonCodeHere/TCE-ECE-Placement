@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>EMC BASICS SET 2</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            line-height: 1.6;
+            background: linear-gradient(270deg, #ff4b4b, #ff9800, #ffda44);
+            background-size: 600% 600%;
+            animation: bgAnimation 12s ease infinite;
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        h2 {
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+        /* Question container */
+        
+        .q-container {
+            max-width: 700px;
+            margin: 0 auto 25px auto;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .q-container:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+        /* Question button */
+        
+        .q-btn {
+            width: 100%;
+            padding: 14px 18px;
+            border: none;
+            background: rgba(229, 57, 53, 0.85);
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 500;
+            text-align: left;
+            transition: background 0.3s, transform 0.2s;
+            margin-bottom: 15px;
+        }
+        
+        .q-btn:hover {
+            background: rgba(183, 28, 28, 0.9);
+            transform: translateY(-2px);
+        }
+        /* Answer box */
+        
+        .answer-box {
+            display: none;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #fff;
+            animation: fadeIn 0.5s;
+        }
+        
+        .answer-box.active {
+            display: block;
+        }
+        /* Light Mode */
+        
+        body.light {
+            background: linear-gradient(270deg, #ffecd2, #fcb69f, #ffe29f);
+            background-size: 600% 600%;
+            animation: bgAnimationLight 12s ease infinite;
+            color: #333;
+        }
+        
+        body.light h2 {
+            color: #222;
+        }
+        
+        body.light .q-container {
+            background: rgba(255, 255, 255, 0.6);
+            color: #000;
+        }
+        
+        body.light .answer-box {
+            background: rgba(255, 255, 255, 0.8);
+            color: #000;
+        }
+        /* Dark Mode */
+        
+        body.dark {
+            background: linear-gradient(270deg, #000000, #8b0000, #000000);
+            background-size: 400% 400%;
+            animation: bgAnimationDark 10s ease infinite;
+            color: #eee;
+        }
+        
+        body.dark h2 {
+            color: #fff;
+        }
+        
+        body.dark .q-container {
+            background: rgba(30, 30, 30, 0.6);
+        }
+        
+        body.dark .answer-box {
+            background: rgba(50, 50, 50, 0.8);
+        }
+        /* Animations */
+        
+        @keyframes bgAnimationLight {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        @keyframes bgAnimationDark {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        /* Theme Toggle Button */
+        
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 18px;
+            background: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+            z-index: 1000;
+        }
+        
+        .theme-toggle:hover {
+            background: #e64a19;
+            transform: scale(1.05);
+        }
+        /* Animations */
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bgAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark">
+    <button class="theme-toggle" id="themeBtn">☀️ Light Mode</button>
+    <h2>EMC BASICS SET 2</h2>
+
+    <!-- Q&A blocks -->
+    <div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(0)">11. Define linear and bilateral network.</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p><b>Linear Network:</b> A circuit or network whose parameters (resistors, inductors, capacitors) remain constant irrespective of changes in time, voltage, or temperature. Ohm’s law and superposition theorem are applicable.</p>
+        <p><b>Bilateral Network:</b> A circuit whose characteristics remain the same regardless of current direction. Example: A network consisting only of resistors.</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(1)">12. Define distributed elements. Give an example.</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>A network in which circuit elements (resistance, inductance, capacitance) cannot be separated for analysis. Example: Transmission line, where R, L, and C are distributed along its length.</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(2)">13. Define active and passive networks.</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p><b>Active Network:</b> Contains a source of energy (e.g., voltage or current sources).</p>
+        <p><b>Passive Network:</b> Contains no energy source, only passive elements (R, L, C).</p>
+    </div>
+</div>
+<div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(3)">14: Write the current division rule.</button>
+        <div class="answer-box">
+            <p><b>Answer:</b></p>
+            <img src="EMCQ14.png" alt="CURRENT DIVISION RULE" style="max-width:100%; border-radius:10px; margin-top:10px;">
+
+        </div>
+    </div>
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(4)">15. Define i) charge ii) electric current iii) power iv) network v) circuit.</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p><b>Charge:</b> Electrical property of atomic particles; measured in coulombs (C).</p>
+        <p><b>Electric Current:</b> Time rate of change of charge; i = dq/dt; measured in amperes (A). DC → constant with time, AC → sinusoidal variation.</p>
+        <p><b>Power:</b> Time rate of expending/absorbing energy; p = dw/dt = vi; measured in watts (W).</p>
+        <p><b>Network:</b> Interconnection of two or more circuit elements.</p>
+        <p><b>Circuit:</b> A network containing at least one closed path.</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(5)">16. What is a super-mesh? How does it differ from a normal mesh, and when would you apply this concept?</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>i) A super-mesh occurs when a current source lies between two meshes (not on the outer edge).</p>
+        <p>ii) Combine the two meshes (excluding the current source branch) and apply KVL.</p>
+        <p>iii) Normal mesh includes all branches, but super-mesh skips the current source.</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(6)">17. Explain the condition for maximum power transfer in an AC circuit with complex impedances. How does it change for purely resistive circuits?</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>i) In AC: Maximum power is delivered when load impedance = complex conjugate of source impedance (Z<sub>L</sub> = Z*<sub>S</sub>).</p>
+        <p>ii) Purely resistive: Load resistance = Source resistance (R<sub>L</sub> = R<sub>S</sub>).</p>
+        <p>iii) For complex: R<sub>L</sub> = R<sub>S</sub>, X<sub>L</sub> = −X<sub>S</sub>.</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(7)">18. Describe the concept of a zero input response (ZIR) in a circuit and provide an example.</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>ZIR is the circuit’s response with only initial stored energy (no external input).</p>
+        <p>Example: In RLC circuits, stored energy in inductors or capacitors causes transient voltages/currents after supply is disconnected (e.g., ringing in relays, surge in transformer windings).</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(8)">19. How would you troubleshoot a sudden voltage drop in a sensitive circuit if EMI is suspected?</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>i) Check loose/oxidized connections.</p>
+        <p>ii) Use oscilloscope to detect noise/spikes.</p>
+        <p>iii) Implement shielding, twisted pair cables.</p>
+        <p>iv) Add ferrite beads/EMI filters.</p>
+        <p>v) Route signal and power lines separately.</p>
+        <p>Theory: Voltage drop may occur due to induced EMF or coupled noise.</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(9)">20. What is the practical significance of coefficient of coupling in coupled circuits, and how can it be maximized?</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>i) Represents magnetic linkage efficiency between coils (0–1 range).</p>
+        <p>ii) High coupling → efficient energy transfer.</p>
+        <p>iii) To maximize: Wind coils closely, use high-µ core (iron/ferrite), reduce air gaps, align axes properly.</p>
+    </div>
+</div>
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(10)">21. Define: Node, Tree, and Branch.</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p><b>Node:</b> A point where two or more elements are connected.</p>
+        <p><b>Tree:</b> A path that includes all nodes without forming loops.</p>
+        <p><b>Branch:</b> A part of the circuit lying between two nodes.</p>
+    </div>
+</div>
+
+
+    <script>
+        const answers = document.querySelectorAll(".answer-box");
+        const themeBtn = document.getElementById("themeBtn");
+
+        function toggleAnswer(index) {
+            answers[index].classList.toggle("active");
+        }
+
+        // Dark/Light Theme Toggle
+        themeBtn.addEventListener("click", () => {
+            if (document.body.classList.contains("dark")) {
+                document.body.classList.remove("dark");
+                document.body.classList.add("light");
+                themeBtn.textContent = "🌙 Dark Mode";
+            } else {
+                document.body.classList.remove("light");
+                document.body.classList.add("dark");
+                themeBtn.textContent = "☀️ Light Mode";
+            }
+        });
+    </script>
+</body>
+
+</html>

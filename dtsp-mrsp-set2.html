@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Multirate Signal Processing - Set 2</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            line-height: 1.6;
+            background: linear-gradient(270deg, #ff4b4b, #ff9800, #ffda44);
+            background-size: 600% 600%;
+            animation: bgAnimation 12s ease infinite;
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        h2 {
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+        /* Question container */
+        
+        .q-container {
+            max-width: 700px;
+            margin: 0 auto 25px auto;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .q-container:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+        /* Question button */
+        
+        .q-btn {
+            width: 100%;
+            padding: 14px 18px;
+            border: none;
+            background: rgba(229, 57, 53, 0.85);
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 500;
+            text-align: left;
+            transition: background 0.3s, transform 0.2s;
+            margin-bottom: 15px;
+        }
+        
+        .q-btn:hover {
+            background: rgba(183, 28, 28, 0.9);
+            transform: translateY(-2px);
+        }
+        /* Answer box */
+        
+        .answer-box {
+            display: none;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #fff;
+            animation: fadeIn 0.5s;
+        }
+        
+        .answer-box.active {
+            display: block;
+        }
+        /* Light Mode */
+        
+        body.light {
+            background: linear-gradient(270deg, #ffecd2, #fcb69f, #ffe29f);
+            background-size: 600% 600%;
+            animation: bgAnimationLight 12s ease infinite;
+            color: #333;
+        }
+        
+        body.light h2 {
+            color: #222;
+        }
+        
+        body.light .q-container {
+            background: rgba(255, 255, 255, 0.6);
+            color: #000;
+        }
+        
+        body.light .answer-box {
+            background: rgba(255, 255, 255, 0.8);
+            color: #000;
+        }
+        /* Dark Mode */
+        
+        body.dark {
+            background: linear-gradient(270deg, #000000, #8b0000, #000000);
+            background-size: 400% 400%;
+            animation: bgAnimationDark 10s ease infinite;
+            color: #eee;
+        }
+        
+        body.dark h2 {
+            color: #fff;
+        }
+        
+        body.dark .q-container {
+            background: rgba(30, 30, 30, 0.6);
+        }
+        
+        body.dark .answer-box {
+            background: rgba(50, 50, 50, 0.8);
+        }
+        /* Animations */
+        
+        @keyframes bgAnimationLight {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        @keyframes bgAnimationDark {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        /* Theme Toggle Button */
+        
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 18px;
+            background: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+            z-index: 1000;
+        }
+        
+        .theme-toggle:hover {
+            background: #e90505;
+            transform: scale(1.05);
+        }
+        /* Animations */
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bgAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark">
+    <button class="theme-toggle" id="themeBtn">☀️ Light Mode</button>
+    <h2>Multirate Signal Processing - Set 2</h2>
+
+    <!-- Q&A blocks -->
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(0)">Q6. You have an audio signal sampled at 8 kHz, but your processor requires a 24 kHz input. Which DSP technique will you use to increase the sampling rate, and why must you filter the signal after this step?</button>
+        <div class="answer-box">
+            <p><b>Answer:</b></p>
+            <p>Use interpolation (upsampling) by a factor of 3 to increase the sampling rate from 8 kHz to 24 kHz. After inserting extra samples, unwanted spectral images appear in the frequency domain. A low-pass filter is applied to remove these images and keep only the original spectrum.</p>
+        </div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(1)">Q7. A speech signal is sampled at 8 kHz and you increase its sampling rate by a factor of 3. What is the new sampling rate? What should be the low-pass filter cutoff frequency to prevent imaging distortion?</button>
+        <div class="answer-box">
+            <p><b>Answer:</b></p>
+            <p>New sampling rate = 8 kHz × 3 = 24 kHz.</p>
+            <p>Low-pass filter cutoff frequency = original Nyquist frequency = 4 kHz.</p>
+        </div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(2)">Q8. You need to convert a video signal sampled at 30 kHz to 20 kHz without losing important frequency content. Which sampling rate conversion method would you use, and why is filtering applied in this process?</button>
+        <div class="answer-box">
+            <p><b>Answer:</b></p>
+            <p>Use sampling rate conversion by a rational factor (30 → 20 kHz). First, interpolate (upsample) by 2 to reach 60 kHz, then decimate by 3 to get 20 kHz.</p>
+            <p><b>Filtering:</b> A low-pass filter is applied before decimation to remove frequencies above 10 kHz and after interpolation to remove spectral images.</p>
+        </div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(3)">Q9. You have a signal sampled at 8 kHz, and you want to convert it to 12 kHz. Determine the interpolation factor (I) and decimation factor (D). What will be the intermediate sampling rate before decimation?</button>
+        <div class="answer-box">
+            <p><b>Answer:</b></p>
+            <p>Interpolation factor (I) = 3, Decimation factor (D) = 2.</p>
+            <p>Intermediate sampling rate before decimation = 8 kHz × 3 = 24 kHz.</p>
+        </div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(4)">Q10. An audio file is recorded at 44.1 kHz and needs to be processed at 48 kHz. Find the smallest integer values of I and D for this conversion. What intermediate sampling rate will be produced before decimation?</button>
+        <div class="answer-box">
+            <p><b>Answer:</b></p>
+            <p>Interpolation factor (I) = 160, Decimation factor (D) = 147.</p>
+            <p>Intermediate sampling rate before decimation = 44.1 kHz × 160 = 7.056 MHz.</p>
+        </div>
+    </div>
+
+    <script>
+        const answers = document.querySelectorAll(".answer-box");
+        const themeBtn = document.getElementById("themeBtn");
+
+        function toggleAnswer(index) {
+            answers[index].classList.toggle("active");
+        }
+
+        // Dark/Light Theme Toggle
+        themeBtn.addEventListener("click", () => {
+            if (document.body.classList.contains("dark")) {
+                document.body.classList.remove("dark");
+                document.body.classList.add("light");
+                themeBtn.textContent = "🌙 Dark Mode";
+            } else {
+                document.body.classList.remove("light");
+                document.body.classList.add("dark");
+                themeBtn.textContent = "☀️ Light Mode";
+            }
+        });
+    </script>
+</body>
+
+</html>

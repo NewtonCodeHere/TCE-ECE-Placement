@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>EMC MAGNETIC CIRCUITS SET 2</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            line-height: 1.6;
+            background: linear-gradient(270deg, #ff4b4b, #ff9800, #ffda44);
+            background-size: 600% 600%;
+            animation: bgAnimation 12s ease infinite;
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        h2 {
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+        /* Question container */
+        
+        .q-container {
+            max-width: 700px;
+            margin: 0 auto 25px auto;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .q-container:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+        /* Question button */
+        
+        .q-btn {
+            width: 100%;
+            padding: 14px 18px;
+            border: none;
+            background: rgba(229, 57, 53, 0.85);
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 500;
+            text-align: left;
+            transition: background 0.3s, transform 0.2s;
+            margin-bottom: 15px;
+        }
+        
+        .q-btn:hover {
+            background: rgba(183, 28, 28, 0.9);
+            transform: translateY(-2px);
+        }
+        /* Answer box */
+        
+        .answer-box {
+            display: none;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #fff;
+            animation: fadeIn 0.5s;
+        }
+        
+        .answer-box.active {
+            display: block;
+        }
+        /* Light Mode */
+        
+        body.light {
+            background: linear-gradient(270deg, #ffecd2, #fcb69f, #ffe29f);
+            background-size: 600% 600%;
+            animation: bgAnimationLight 12s ease infinite;
+            color: #333;
+        }
+        
+        body.light h2 {
+            color: #222;
+        }
+        
+        body.light .q-container {
+            background: rgba(255, 255, 255, 0.6);
+            color: #000;
+        }
+        
+        body.light .answer-box {
+            background: rgba(255, 255, 255, 0.8);
+            color: #000;
+        }
+        /* Dark Mode */
+        
+        body.dark {
+            background: linear-gradient(270deg, #000000, #8b0000, #000000);
+            background-size: 400% 400%;
+            animation: bgAnimationDark 10s ease infinite;
+            color: #eee;
+        }
+        
+        body.dark h2 {
+            color: #fff;
+        }
+        
+        body.dark .q-container {
+            background: rgba(30, 30, 30, 0.6);
+        }
+        
+        body.dark .answer-box {
+            background: rgba(50, 50, 50, 0.8);
+        }
+        /* Animations */
+        
+        @keyframes bgAnimationLight {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        @keyframes bgAnimationDark {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        /* Theme Toggle Button */
+        
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 18px;
+            background: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+            z-index: 1000;
+        }
+        
+        .theme-toggle:hover {
+            background: #e64a19;
+            transform: scale(1.05);
+        }
+        /* Animations */
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bgAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark">
+    <button class="theme-toggle" id="themeBtn">☀️ Light Mode</button>
+    <h2>EMC MAGNETIC CIRCUITS SET 2</h2>
+
+    <!-- Q&A blocks -->
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(0)">84. How does a transformer work, and what is its main function?</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>A transformer works on the principle of electromagnetic induction. It transfers electrical energy between circuits through a changing magnetic field.</p>
+        <p>Main function: To step up or step down AC voltages using different numbers of turns on primary and secondary windings.</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(1)">85. Define magnetic flux and its unit.</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>Magnetic flux (Φ) is the total magnetic field passing through a surface.</p>
+        <p>Formula: Φ = B · A · cosθ</p>
+        <p>Unit: Weber (Wb) → 1 Wb = 1 Tesla·m²</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(2)">86. Compare reluctance and resistance.</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <ul>
+            <li><b>Reluctance (ℜ):</b> Opposes magnetic flux; ℜ = l / μA; unit: AT/Wb.</li>
+            <li><b>Resistance (R):</b> Opposes electric current; R = ρl / A; unit: Ω.</li>
+        </ul>
+        <p>Both act as "traffic cops" but for different flows (flux vs current).</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(3)">87. Define permeability and its types.</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>Permeability (μ) measures how easily a material allows magnetic flux.</p>
+        <ul>
+            <li>Absolute permeability (μ): in H/m</li>
+            <li>Relative permeability (μr): ratio to free-space permeability μ0</li>
+        </ul>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(4)">88. What is the significance of B–H curve?</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>The B–H curve shows how flux density (B) changes with magnetizing force (H).</p>
+        <p>It reveals the material’s saturation point, hysteresis loss, and suitability for cores.</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(5)">89. State Faraday’s law of electromagnetic induction.</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>Induced EMF is proportional to the rate of change of magnetic flux:</p>
+        <p><b>e = -N (dΦ/dt)</b></p>
+        <p>Minus sign represents Lenz’s law (induced EMF opposes the cause).</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(6)">90. State the difference between series and parallel magnetic circuits.</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <ul>
+            <li>Series: Flux is same, MMF divides.</li>
+            <li>Parallel: MMF is same, flux divides.</li>
+        </ul>
+        <p>Analogous to series/parallel resistors, but with magnetic terms.</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(7)">91. A magnetic core has a mean length of 50 cm, cross-sectional area A, and relative permeability μr. Coil has 200 turns, carrying 2 A. Calculate:</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <ul>
+            <li>i. Magnetic field strength (H)</li>
+            <li>ii. Flux density (B)</li>
+            <li>iii. Total flux (Φ)</li>
+        </ul>
+        <img src="EMCQ61.png" alt="Magnetic Core Calculation" style="max-width:100%; border-radius:10px; margin-top:10px;">
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(8)">92. What is the significance of Permeance in magnetic circuits?</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>Permeance is the reciprocal of reluctance, indicating how easily magnetic flux can be established.</p>
+        <p>High permeance improves flux conduction and efficiency.</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(9)">93. State and explain Ampere's Circuital Law.</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>The line integral of magnetic field (H) around a closed path equals the net current enclosed:</p>
+        <p><b>∮ H · dl = NI</b></p>
+        <p>Used to determine magnetic field strength in symmetrical paths.</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(10)">94. What is Skin Effect and how does it affect AC circuits?</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>Skin effect: AC current concentrates near the conductor surface at higher frequencies.</p>
+        <p>Effect: Reduces effective cross-section → increases resistance.</p>
+        <p>Mitigation: Use stranded conductors or Litz wire.</p>
+    </div>
+</div>
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(11)">95. What is self-inductance (L)?</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>The property of a coil due to which it opposes any increase or decrease of current or flux through it is called <b>self-inductance</b>.</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(12)">96. What is the mutual inductance between two coils?</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>Mutual inductance (M) is a property where a changing current in one coil induces an EMF in a neighboring coil. The induced EMF is proportional to the rate of change of current.</p>
+        <p>Unit: Henry (H)</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(13)">97. Define hysteresis and eddy current losses in magnetic circuits.</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <ul>
+            <li><b>Hysteresis loss:</b> Energy dissipated as heat when a magnetic material is repeatedly magnetized and demagnetized. Proportional to the area of the hysteresis loop.</li>
+            <li><b>Eddy current loss:</b> Energy dissipated due to small circulating currents (eddy currents) induced in the core material by the changing magnetic flux. Reduced by using laminated cores.</li>
+        </ul>
+        <p><img src="EMCQ50.png" alt="Hysteresis and Eddy Current Losses" style="max-width:100%; border-radius:10px; margin-top:10px;"></p>
+    </div>
+</div>
+
+    <script>
+        const answers = document.querySelectorAll(".answer-box");
+        const themeBtn = document.getElementById("themeBtn");
+
+        function toggleAnswer(index) {
+            answers[index].classList.toggle("active");
+        }
+
+        // Dark/Light Theme Toggle
+        themeBtn.addEventListener("click", () => {
+            if (document.body.classList.contains("dark")) {
+                document.body.classList.remove("dark");
+                document.body.classList.add("light");
+                themeBtn.textContent = "🌙 Dark Mode";
+            } else {
+                document.body.classList.remove("light");
+                document.body.classList.add("dark");
+                themeBtn.textContent = "☀️ Light Mode";
+            }
+        });
+    </script>
+</body>
+
+</html>

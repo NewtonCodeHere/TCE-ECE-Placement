@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Switch Level Modelling- Set 2</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            line-height: 1.6;
+            background: linear-gradient(270deg, #ff4b4b, #ff9800, #ffda44);
+            background-size: 600% 600%;
+            animation: bgAnimation 12s ease infinite;
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        h2 {
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+        /* Question container */
+        
+        .q-container {
+            max-width: 700px;
+            margin: 0 auto 25px auto;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .q-container:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+        /* Question button */
+        
+        .q-btn {
+            width: 100%;
+            padding: 14px 18px;
+            border: none;
+            background: rgba(229, 57, 53, 0.85);
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 500;
+            text-align: left;
+            transition: background 0.3s, transform 0.2s;
+            margin-bottom: 15px;
+        }
+        
+        .q-btn:hover {
+            background: rgba(183, 28, 28, 0.9);
+            transform: translateY(-2px);
+        }
+        /* Answer box */
+        
+        .answer-box {
+            display: none;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #fff;
+            animation: fadeIn 0.5s;
+        }
+        
+        .answer-box.active {
+            display: block;
+        }
+        /* Light Mode */
+        
+        body.light {
+            background: linear-gradient(270deg, #ffecd2, #fcb69f, #ffe29f);
+            background-size: 600% 600%;
+            animation: bgAnimationLight 12s ease infinite;
+            color: #333;
+        }
+        
+        body.light h2 {
+            color: #222;
+        }
+        
+        body.light .q-container {
+            background: rgba(255, 255, 255, 0.6);
+            color: #000;
+        }
+        
+        body.light .answer-box {
+            background: rgba(255, 255, 255, 0.8);
+            color: #000;
+        }
+        /* Dark Mode */
+        
+        body.dark {
+            background: linear-gradient(270deg, #000000, #8b0000, #000000);
+            background-size: 400% 400%;
+            animation: bgAnimationDark 10s ease infinite;
+            color: #eee;
+        }
+        
+        body.dark h2 {
+            color: #fff;
+        }
+        
+        body.dark .q-container {
+            background: rgba(30, 30, 30, 0.6);
+        }
+        
+        body.dark .answer-box {
+            background: rgba(50, 50, 50, 0.8);
+        }
+        /* Animations */
+        
+        @keyframes bgAnimationLight {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        @keyframes bgAnimationDark {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        /* Theme Toggle Button */
+        
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 18px;
+            background: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+            z-index: 1000;
+        }
+        
+        .theme-toggle:hover {
+            background: #e64a19;
+            transform: scale(1.05);
+        }
+        /* Animations */
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bgAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark">
+    <button class="theme-toggle" id="themeBtn">☀️ Light Mode</button>
+    <h2>Switch Level Modelling- Set 2</h2>
+
+    <!-- Q&A Blocks -->
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(0)">Q1: What is switch-level modelling in Verilog, and in what situations is it used?</button>
+        <div class="answer-box"><p><b>Answer:</b> Switch-level modelling represents circuits at the transistor (MOSFET) level using primitives like nmos, pmos, cmos, and TG. It is used for simulating custom digital designs at the transistor level, such as standard cells or pass-transistor logic.</p></div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(1)">Q2: How does switch-level modelling differ from gate-level and behavioral modelling in Verilog?</button>
+        <div class="answer-box">
+            <p><b>Answer:</b></p>
+            <ul>
+                <li><b>Behavioral:</b> High-level constructs (if, case), abstracts hardware.</li>
+                <li><b>Gate-level:</b> Uses logic gates (and, or, not).</li>
+                <li><b>Switch-level:</b> Lowest abstraction using transistors (nmos, pmos).</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(2)">Q3: In Verilog, what are nmos, pmos, and cmos primitives used for?</button>
+        <div class="answer-box">
+            <ul>
+                <li><b>nmos:</b> NMOS transistor (control, two nodes).</li>
+                <li><b>pmos:</b> PMOS transistor (control, two nodes).</li>
+                <li><b>cmos:</b> Complementary switch (NMOS + PMOS for CMOS logic).</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(3)">Q4: Difference between tran, tranif1, and tranif0 primitives?</button>
+        <div class="answer-box">
+            <ul>
+                <li><b>tran:</b> Unconditional bidirectional pass switch.</li>
+                <li><b>tranif1:</b> Conducts when control = 1.</li>
+                <li><b>tranif0:</b> Conducts when control = 0.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(4)">Q5: What logic values can appear at the output of a switch-level model besides 0 and 1?</button>
+        <div class="answer-box">
+            <p><b>Answer:</b>
+                <p>The output can be:
+•	0, 1: logic levels
+•	z: high-impedance (floating)
+•	x: unknown, due to contention or uninitialized inputs
+•	Possibly weak1, strong0, etc., internally (depending on drivers)
+</p>
+       </div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(5)">Q6: You have an NMOS pass transistor. What happens when you pass a logic 1 through it?</button>
+        <div class="answer-box">
+            <p><b>Answer:</b> NMOS passes strong 0, but degraded 1 due to threshold drop (Vdd - Vth).</p>
+            <p><b>Verilog:</b></p>
+            <p>nmos n1 (out, in, control);</p>
+        </div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(6)">Q7: Write Verilog code to connect a device I/O to a bidirectional bus using tranif1.</button>
+        <div class="answer-box">
+            <pre><code>
+module bus_device (bus, device_io, enable);
+  inout bus;
+  wire device_io;
+  input enable;
+  tranif1 t1 (bus, device_io, enable);  
+endmodule
+            </code></pre>
+        </div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(7)">Q8: Simulate a CMOS Transmission Gate in switch-level modelling.</button>
+        <div class="answer-box">
+            <pre><code>
+module transmission_gate (out, in, EN, EN_bar);
+  input in, EN, EN_bar;
+  output out;
+  wire out;
+  nmos n1 (out, in, EN);
+  pmos p1 (out, in, EN_bar);
+endmodule
+            </code></pre>
+        </div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(8)">Q9: Simulate an NMOS Pass Transistor in switch-level modelling.</button>
+        <div class="answer-box">
+            <pre><code>
+module nmos_switch (Y, A, C);
+  input A, C;
+  output Y;
+  wire Y;
+  nmos n1 (Y, A, C);
+endmodule
+            </code></pre>
+        </div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(9)">Q10: Simulate a simple SR latch using switch-level modelling.</button>
+        <div class="answer-box">
+           <pre> <code>
+module sr_latch (Q, Qbar, S, R);
+  input S, R;
+  output Q, Qbar;
+  wire Q, Qbar;
+  nmos n1 (Qbar, 1'b0, S); 
+  nmos n2 (Q, 1'b0, R);
+  pullup (Q);
+  pullup (Qbar);
+endmodule
+            </code></pre>
+        </div>
+    </div>
+
+    <script>
+        const answers = document.querySelectorAll(".answer-box");
+        const themeBtn = document.getElementById("themeBtn");
+
+        function toggleAnswer(index) {
+            answers[index].classList.toggle("active");
+        }
+
+        // Dark/Light Theme Toggle
+        themeBtn.addEventListener("click", () => {
+            if (document.body.classList.contains("dark")) {
+                document.body.classList.remove("dark");
+                document.body.classList.add("light");
+                themeBtn.textContent = "🌙 Dark Mode";
+            } else {
+                document.body.classList.remove("light");
+                document.body.classList.add("dark");
+                themeBtn.textContent = "☀️ Light Mode";
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>OOP AND DSA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298, #ff512f, #dd2476);
+            background-size: 400% 400%;
+            animation: gradientBG 12s ease infinite;
+            color: white;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        nav {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .logo {
+            font-size: 1.4rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        main {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        h2 {
+            margin-bottom: 30px;
+            color: #ffe600;
+            font-size: 2rem;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .sets {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        .set-btn {
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 15px;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            font-weight: bold;
+            transition: transform 0.3s, background 0.3s;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .set-btn:hover,
+        .set-btn.active {
+            transform: translateY(-8px) scale(1.05);
+            background: rgba(255, 255, 255, 0.25);
+        }
+        
+        footer {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            text-align: center;
+            font-size: 0.9rem;
+            box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">OOP and DSA - TYPES OF ALGORITHMS</div>
+        <a href="signals.html" style="color:white; text-decoration:none;">⬅ Back</a>
+    </nav>
+
+    <main>
+        <h2>Choose one Algorithm</h2>
+        <div class="sets">
+            <a href="algo.greedy.html" class="set-btn">GREEDY ALGORITHMS</a>
+            <a href="algo.back.html" class="set-btn">BACK-TRACKING ALGORITHMS</a>
+            <a href="algo.div.html" class="set-btn">DIVIDE & CONQUER ALGORITHMS</a>
+            
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2027 Batch Placement Portal | All Rights Reserved
+    </footer>
+
+    <!-- Window Listener Script -->
+    <script>
+        const buttons = document.querySelectorAll(".set-btn");
+        let currentIndex = 0;
+
+        // highlight the first button by default
+        buttons[currentIndex].classList.add("active");
+
+        function updateActive(index) {
+            buttons.forEach(btn => btn.classList.remove("active"));
+            buttons[index].classList.add("active");
+            currentIndex = index;
+        }
+
+        // Keyboard navigation
+        window.addEventListener("keydown", function(event) {
+            if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+                let next = (currentIndex + 1) % buttons.length;
+                updateActive(next);
+            } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+                let prev = (currentIndex - 1 + buttons.length) % buttons.length;
+                updateActive(prev);
+            } else if (event.key === "Enter") {
+                buttons[currentIndex].click();
+            }
+        });
+
+        // Mobile: tap to select, double tap to go
+        buttons.forEach((btn, index) => {
+            let tapped = false;
+            btn.addEventListener("touchstart", function() {
+                if (currentIndex === index && tapped) {
+                    btn.click(); // second tap = go
+                } else {
+                    updateActive(index); // first tap = select
+                    tapped = true;
+                    setTimeout(() => tapped = false, 400); // reset after 400ms
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

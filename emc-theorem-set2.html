@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>EMC THEOREMS SET 2</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            line-height: 1.6;
+            background: linear-gradient(270deg, #ff4b4b, #ff9800, #ffda44);
+            background-size: 600% 600%;
+            animation: bgAnimation 12s ease infinite;
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        h2 {
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+        /* Question container */
+        
+        .q-container {
+            max-width: 700px;
+            margin: 0 auto 25px auto;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .q-container:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+        /* Question button */
+        
+        .q-btn {
+            width: 100%;
+            padding: 14px 18px;
+            border: none;
+            background: rgba(229, 57, 53, 0.85);
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 500;
+            text-align: left;
+            transition: background 0.3s, transform 0.2s;
+            margin-bottom: 15px;
+        }
+        
+        .q-btn:hover {
+            background: rgba(183, 28, 28, 0.9);
+            transform: translateY(-2px);
+        }
+        /* Answer box */
+        
+        .answer-box {
+            display: none;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #fff;
+            animation: fadeIn 0.5s;
+        }
+        
+        .answer-box.active {
+            display: block;
+        }
+        /* Light Mode */
+        
+        body.light {
+            background: linear-gradient(270deg, #ffecd2, #fcb69f, #ffe29f);
+            background-size: 600% 600%;
+            animation: bgAnimationLight 12s ease infinite;
+            color: #333;
+        }
+        
+        body.light h2 {
+            color: #222;
+        }
+        
+        body.light .q-container {
+            background: rgba(255, 255, 255, 0.6);
+            color: #000;
+        }
+        
+        body.light .answer-box {
+            background: rgba(255, 255, 255, 0.8);
+            color: #000;
+        }
+        /* Dark Mode */
+        
+        body.dark {
+            background: linear-gradient(270deg, #000000, #8b0000, #000000);
+            background-size: 400% 400%;
+            animation: bgAnimationDark 10s ease infinite;
+            color: #eee;
+        }
+        
+        body.dark h2 {
+            color: #fff;
+        }
+        
+        body.dark .q-container {
+            background: rgba(30, 30, 30, 0.6);
+        }
+        
+        body.dark .answer-box {
+            background: rgba(50, 50, 50, 0.8);
+        }
+        /* Animations */
+        
+        @keyframes bgAnimationLight {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        @keyframes bgAnimationDark {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        /* Theme Toggle Button */
+        
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 18px;
+            background: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+            z-index: 1000;
+        }
+        
+        .theme-toggle:hover {
+            background: #e64a19;
+            transform: scale(1.05);
+        }
+        /* Animations */
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bgAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark">
+    <button class="theme-toggle" id="themeBtn">☀️ Light Mode</button>
+    <h2>EMC THEOREMS SET 2</h2>
+
+    <!-- Q&A blocks -->
+    <div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(0)">36. State the steps to solve the superposition theorem.</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <ol>
+            <li>Take only one independent voltage or current source.</li>
+            <li>Obtain the branch currents.</li>
+            <li>Repeat the above for other sources.</li>
+            <li>To determine the net branch current, add the currents obtained above.</li>
+        </ol>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(1)">37. State the steps to solve Norton’s theorem.</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <ol>
+            <li>Remove the load resistor and find the internal resistance of the source network by deactivating the constant sources.</li>
+            <li>Short the load terminals and find the short-circuit current.</li>
+            <li>Norton’s equivalent circuit is drawn by keeping Rth in parallel with Isc.</li>
+            <li>Load current: IL = (Isc × Rth) / (Rth + RL)</li>
+        </ol>
+        <p><b>Example:</b></p>
+        <p>At junction a: i1 - i3 - i2 = 0 → i2 = 2A</p>
+        <p>At junction b: i4 + i2 - i6 = 0 → i4 = -1A</p>
+        <p>At junction c: i3 - i5 - i4 = 0 → i5 = 2A</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(2)">38. Calculate the mesh currents.</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>The two meshes with a 3A source form a super-mesh. Mesh equations:</p>
+        <ul>
+            <li>I1 - I3 = -3</li>
+            <li>4I1 - 14I2 + 11I3 = 10</li>
+            <li>4I1 - 28I2 + 10I3 = 0</li>
+        </ul>
+        <p>Solution: I1 = -1A, I2 = 0.57A, I3 = 2A</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(3)">39. Find the value of V1 if the current through the 1Ω resistor = 0A.</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>Mesh equations (I1, I2, I3; I3 = 0):</p>
+        <ul>
+            <li>15I1 - 5I2 = V1</li>
+            <li>-5I1 + 10I2 = 0</li>
+            <li>3I2 = 10</li>
+        </ul>
+        <p>Solving: V1 = 83.33 V</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(4)">740. Calculate the Thevenin resistance across terminal AB.</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>Open the circuit at terminals AB and short all voltage sources.</p>
+        <p>Rth = (1 || 2) + 3 = 3.67 Ω</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(5)">41. For Rth = 8Ω, what load RL gives maximum power? Find Pmax if Vth = 16V.</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>Maximum power occurs when RL = Rth = 8Ω</p>
+        <p>Pmax = Vth² / (4 × Rth) = 16² / (4 × 8) = 8 W</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(6)">42. Convert a 24 V source with series 12 Ω to Norton.</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>Short-circuit current Isc = V / Rth = 24 / 12 = 2 A</p>
+        <p>Norton equivalent: In = 2A, Rn = 12 Ω</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(7)">43. Use Superposition theorem to find voltage V in the network.</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p><img src="EMCQ90_1.png" alt="Superposition Theorem Example" style="max-width:100%; border-radius:10px; margin-top:10px;"></p>
+        <p>When the voltage source is killed, use current-divider rule: <img src="EMCQ90_2.png" alt="Current Divider Example" style="max-width:100%; border-radius:10px; margin-top:10px;"></p>
+        <p><img src="EMCQ90_3.png" alt="Current Divider Example" style="max-width:100%; border-radius:10px; margin-top:10px;"></p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(8)">44. Determine current in 5Ω resistor.<br><p><img src="EMCQ91_1.png" alt="Mesh Analysis for 5 Ohm Resistor" style="max-width:100%; border-radius:10px; margin-top:10px;"></p></button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>Use matrix method for mesh analysis. Only i3 is to be found. Resistance matrix and loops marked as shown.</p>
+        <p><img src="EMCQ91_2.png" alt="Mesh Analysis for 5 Ohm Resistor" style="max-width:100%; border-radius:10px; margin-top:10px;"></p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(9)">45. Determine voltages V1 and V2 using nodal analysis.</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p><img src="EMCQ92.png" alt="Nodal Analysis Example" style="max-width:100%; border-radius:10px; margin-top:10px;"></p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(10)">46. Obtain the condition for maximum power transfer to load RL and determine Pmax.<br><p><img src="EMCQ93_1.png" alt="Maximum Power Transfer Example" style="max-width:100%; border-radius:10px; margin-top:10px;"></p></button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>Condition: RL = Rth of the source network.</p>
+        <p>Maximum power: Pmax = Vth² / (4 × Rth)</p>
+        <p><img src="EMCQ93_2.png" alt="Maximum Power Transfer Example" style="max-width:100%; border-radius:10px; margin-top:10px;"></p>
+    </div>
+</div>
+
+    <script>
+        const answers = document.querySelectorAll(".answer-box");
+        const themeBtn = document.getElementById("themeBtn");
+
+        function toggleAnswer(index) {
+            answers[index].classList.toggle("active");
+        }
+
+        // Dark/Light Theme Toggle
+        themeBtn.addEventListener("click", () => {
+            if (document.body.classList.contains("dark")) {
+                document.body.classList.remove("dark");
+                document.body.classList.add("light");
+                themeBtn.textContent = "🌙 Dark Mode";
+            } else {
+                document.body.classList.remove("light");
+                document.body.classList.add("dark");
+                themeBtn.textContent = "☀️ Light Mode";
+            }
+        });
+    </script>
+</body>
+
+</html>

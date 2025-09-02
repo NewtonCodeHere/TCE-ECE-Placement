@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vlsi-FET RC model- Set 2</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            line-height: 1.6;
+            background: linear-gradient(270deg, #ff4b4b, #ff9800, #ffda44);
+            background-size: 600% 600%;
+            animation: bgAnimation 12s ease infinite;
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        h2 {
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+        /* Question container */
+        
+        .q-container {
+            max-width: 700px;
+            margin: 0 auto 25px auto;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .q-container:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+        /* Question button */
+        
+        .q-btn {
+            width: 100%;
+            padding: 14px 18px;
+            border: none;
+            background: rgba(229, 57, 53, 0.85);
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 500;
+            text-align: left;
+            transition: background 0.3s, transform 0.2s;
+            margin-bottom: 15px;
+        }
+        
+        .q-btn:hover {
+            background: rgba(183, 28, 28, 0.9);
+            transform: translateY(-2px);
+        }
+        /* Answer box */
+        
+        .answer-box {
+            display: none;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #fff;
+            animation: fadeIn 0.5s;
+        }
+        
+        .answer-box.active {
+            display: block;
+        }
+        /* Light Mode */
+        
+        body.light {
+            background: linear-gradient(270deg, #ffecd2, #fcb69f, #ffe29f);
+            background-size: 600% 600%;
+            animation: bgAnimationLight 12s ease infinite;
+            color: #333;
+        }
+        
+        body.light h2 {
+            color: #222;
+        }
+        
+        body.light .q-container {
+            background: rgba(255, 255, 255, 0.6);
+            color: #000;
+        }
+        
+        body.light .answer-box {
+            background: rgba(255, 255, 255, 0.8);
+            color: #000;
+        }
+        /* Dark Mode */
+        
+        body.dark {
+            background: linear-gradient(270deg, #000000, #8b0000, #000000);
+            background-size: 400% 400%;
+            animation: bgAnimationDark 10s ease infinite;
+            color: #eee;
+        }
+        
+        body.dark h2 {
+            color: #fff;
+        }
+        
+        body.dark .q-container {
+            background: rgba(30, 30, 30, 0.6);
+        }
+        
+        body.dark .answer-box {
+            background: rgba(50, 50, 50, 0.8);
+        }
+        /* Animations */
+        
+        @keyframes bgAnimationLight {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        @keyframes bgAnimationDark {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        /* Theme Toggle Button */
+        
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 18px;
+            background: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+            z-index: 1000;
+        }
+        
+        .theme-toggle:hover {
+            background: #e64a19;
+            transform: scale(1.05);
+        }
+        /* Animations */
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bgAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark">
+    <button class="theme-toggle" id="themeBtn">☀️ Light Mode</button>
+    <h2>FET RC model- Set 2</h2>
+
+   <!-- Q&A blocks -->
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(0)">Q1: What is the FET RC model, and why is it important in VLSI design?</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>The FET RC model is a simplified representation of a Field Effect Transistor (FET) using resistors (R) and capacitors (C) to capture the resistive and capacitive parasitics inherent in the device.<br>
+        In VLSI, this model is essential for analyzing timing, signal delay, and power consumption, especially as device dimensions shrink and parasitic effects dominate circuit performance.</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(1)">Q2: How does the RC model affect the performance of MOSFETs in integrated circuits?</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>The RC model directly impacts:</p>
+        <ul>
+            <li>Switching delay: Higher R or C increases the RC time constant (τ = RC), leading to slower transitions.</li>
+            <li>Signal integrity: Capacitance causes slow rise/fall times, and resistance can lead to voltage drops.</li>
+            <li>Power consumption: Especially dynamic power, since P_dynamic ∝ C × V² × f.</li>
+        </ul>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(2)">Q3: What are the typical resistance and capacitance components modeled in the FET RC model?</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>• Capacitive components:</p>
+        <ul>
+            <li>Gate-to-source capacitance (Cgs)</li>
+            <li>Gate-to-drain capacitance (Cgd)</li>
+            <li>Gate-to-bulk/body (Cgb)</li>
+            <li>Drain-to-bulk and source-to-bulk junction capacitances (Cdb, Csb)</li>
+        </ul>
+        <p>• Resistive components:</p>
+        <ul>
+            <li>Channel resistance (Rch)</li>
+            <li>Source/drain resistance (Rs, Rd)</li>
+            <li>Interconnect resistance</li>
+        </ul>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(3)">Q4: How do parasitic capacitances arise in a MOSFET, and how are they represented in the RC model?</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>Parasitic capacitances arise due to:</p>
+        <ul>
+            <li>Overlaps between gate and source/drain (Cgd, Cgs)</li>
+            <li>Junction capacitance at the source/drain-substrate interface (Csb, Cdb)</li>
+            <li>Gate oxide capacitance (Cox)</li>
+        </ul>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(4)">Q5: What is the impact of channel resistance in the RC model of a FET?</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>Channel resistance (Rch) limits the current drive of the MOSFET and contributes to the overall RC delay. It becomes more significant in short-channel devices, affecting:</p>
+        <ul>
+            <li>Drive strength</li>
+            <li>Voltage drop</li>
+            <li>Power dissipation</li>
+        </ul>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(5)">Q6: How does scaling in VLSI affect the RC characteristics of transistors?</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>As devices scale:</p>
+        <ul>
+            <li>Capacitance decreases due to thinner oxides and smaller gate areas.</li>
+            <li>Resistance increases due to shorter channels and narrower interconnects.</li>
+        </ul>
+        <p>However, interconnect parasitics increase relatively, making wire delays (RC of metal layers) more critical than gate delays in deep submicron and FinFET nodes.</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(6)">Q7: Explain how the RC time constant is derived in a CMOS inverter using the FET RC model.</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>The RC delay for a CMOS inverter is estimated using:<br>
+        τ = Ron × Cload<br>
+        Where:</p>
+        <ul>
+            <li>Ron is the equivalent on-resistance of the PMOS or NMOS (depending on transition)</li>
+            <li>Cload includes intrinsic capacitances + interconnect + fan-out gates</li>
+        </ul>
+        <p>This time constant determines the propagation delay and transition speeds.</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(7)">Q8: What is the role of interconnect RC modeling in modern VLSI designs?</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>In advanced nodes:</p>
+        <ul>
+            <li>Interconnects dominate delay over transistor switching.</li>
+            <li>RC modeling is used for timing closure, crosstalk analysis, and signal integrity.</li>
+            <li>Tools use distributed RC networks to simulate long wires accurately.</li>
+        </ul>
+        <p>Neglecting interconnect RC can result in failed timing or incorrect signal behavior.</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(8)">Q9: How does the FET RC model influence dynamic and static power consumption?</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>• Dynamic power: Increases with higher capacitance (P = αCV²f)<br>
+        • Static power: Less directly affected, but resistive leakage paths can contribute in scaled devices.<br>
+        RC modeling helps quantify dynamic losses and optimize power during design.</p>
+    </div>
+</div>
+
+<div class="q-container">
+    <button class="q-btn" onclick="toggleAnswer(9)">Q10: Describe how you would model and simulate the RC effects of a MOSFET in a circuit simulator like SPICE.</button>
+    <div class="answer-box">
+        <p><b>Answer:</b></p>
+        <p>In SPICE:</p>
+        <ul>
+            <li>The MOSFET model (e.g., Level 1–3, BSIM) includes intrinsic parasitic R and C.</li>
+            <li>Additional RC elements (e.g., lumped or distributed) can be added explicitly for:
+                <ul>
+                    <li>Interconnects</li>
+                    <li>Substrate coupling</li>
+                    <li>Gate resistance (Rg), Source/Drain resistances</li>
+                </ul>
+            </li>
+        </ul>
+        <p>Simulation provides waveforms, delay, and power metrics essential for physical design and verification.</p>
+    </div>
+</div>
+
+
+    <script>
+        const answers = document.querySelectorAll(".answer-box");
+        const themeBtn = document.getElementById("themeBtn");
+
+        function toggleAnswer(index) {
+            answers[index].classList.toggle("active");
+        }
+
+        // Dark/Light Theme Toggle
+        themeBtn.addEventListener("click", () => {
+            if (document.body.classList.contains("dark")) {
+                document.body.classList.remove("dark");
+                document.body.classList.add("light");
+                themeBtn.textContent = "🌙 Dark Mode";
+            } else {
+                document.body.classList.remove("light");
+                document.body.classList.add("dark");
+                themeBtn.textContent = "☀️ Light Mode";
+            }
+        });
+    </script>
+</body>
+
+</html>

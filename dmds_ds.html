@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>OOP AND DSA </title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            line-height: 1.6;
+            background: linear-gradient(270deg, #ff4b4b, #ff9800, #ffda44);
+            background-size: 600% 600%;
+            animation: bgAnimation 12s ease infinite;
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        h2 {
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+        /* Question container */
+        
+        .q-container {
+            max-width: 700px;
+            margin: 0 auto 25px auto;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .q-container:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+        /* Question button */
+        
+        .q-btn {
+            width: 100%;
+            padding: 14px 18px;
+            border: none;
+            background: rgba(229, 57, 53, 0.85);
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 500;
+            text-align: left;
+            transition: background 0.3s, transform 0.2s;
+            margin-bottom: 15px;
+        }
+        
+        .q-btn:hover {
+            background: rgba(183, 28, 28, 0.9);
+            transform: translateY(-2px);
+        }
+        /* Answer box */
+        
+        .answer-box {
+            display: none;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #fff;
+            animation: fadeIn 0.5s;
+        }
+        
+        .answer-box.active {
+            display: block;
+        }
+        /* Light Mode */
+        
+        body.light {
+            background: linear-gradient(270deg, #ffecd2, #fcb69f, #ffe29f);
+            background-size: 600% 600%;
+            animation: bgAnimationLight 12s ease infinite;
+            color: #333;
+        }
+        
+        body.light h2 {
+            color: #222;
+        }
+        
+        body.light .q-container {
+            background: rgba(255, 255, 255, 0.6);
+            color: #000;
+        }
+        
+        body.light .answer-box {
+            background: rgba(255, 255, 255, 0.8);
+            color: #000;
+        }
+        /* Dark Mode */
+        
+        body.dark {
+            background: linear-gradient(270deg, #000000, #8b0000, #000000);
+            background-size: 400% 400%;
+            animation: bgAnimationDark 10s ease infinite;
+            color: #eee;
+        }
+        
+        body.dark h2 {
+            color: #fff;
+        }
+        
+        body.dark .q-container {
+            background: rgba(30, 30, 30, 0.6);
+        }
+        
+        body.dark .answer-box {
+            background: rgba(50, 50, 50, 0.8);
+        }
+        /* Animations */
+        
+        @keyframes bgAnimationLight {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        @keyframes bgAnimationDark {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        /* Theme Toggle Button */
+        
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 18px;
+            background: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+            z-index: 1000;
+        }
+        
+        .theme-toggle:hover {
+            background: #e64a19;
+            transform: scale(1.05);
+        }
+        /* Animations */
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bgAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark">
+    <button class="theme-toggle" id="themeBtn">☀️ Light Mode</button>
+    <h2>DYNAMIC PROGRAMMING</h2>
+
+   <!-- Q&A blocks -->
+<div class="q-container">
+  <button class="q-btn" onclick="toggleAnswer(0)">Q1: In a grid path minimum cost problem, which dynamic programming properties are satisfied, and why can’t a greedy approach guarantee the optimal result?</button>
+  <div class="answer-box">
+    <p><b>Answer:</b></p>
+    <ul>
+      <li>Properties: Overlapping subproblems (paths to a cell reuse paths to neighboring cells), and optimal substructure (optimal path to end from a cell is built from optimal subpaths).</li>
+      <li>Greedy fails because a locally minimal move may lead to a globally worse path—it doesn’t account for future costs.</li>
+    </ul>
+  </div>
+</div>
+<div class="q-container">
+  <button class="q-btn" onclick="toggleAnswer(1)">Q2: What does the below code print and why is the call count low?
+    <pre>
+calls = 0
+def f(n, memo={}):
+    global calls
+    calls += 1
+    if n in memo: return memo[n]
+    if n <= 2: return 1
+    memo[n] = f(n-1, memo) + f(n-2, memo)
+    return memo[n]
+print(f(6))
+print(calls)
+    </pre>
+  </button>
+  <div class="answer-box">
+    <p><b>Answer:</b> 8 and 9</p>
+    <p><b>Explanation:</b> Memoization avoids recomputation—only unique subproblems are solved, so calls are greatly reduced from exponential to linear.</p>
+  </div>
+</div>
+<div class="q-container">
+  <button class="q-btn" onclick="toggleAnswer(2)">Q3: What's wrong with the following code if we expect dp[n] to be filled?
+    <pre>
+dp = [0]*(n+1)
+dp[0], dp[1] = 0, 1
+for i in range(2, n):
+    dp[i] = dp[i-1] + dp[i-2]
+    </pre>
+  </button>
+  <div class="answer-box">
+    <p><b>Answer:</b> The loop uses <code>range(2, n)</code> which ends at n-1. For dp[n] to be computed, it must be <code>range(2, n+1)</code>.</p>
+  </div>
+</div>
+<div class="q-container">
+  <button class="q-btn" onclick="toggleAnswer(3)">Q4: What is the time complexity of finding the longest common subsequence (LCS) of strings a and b of lengths m and n using DP, and how can we reduce the space complexity?</button>
+  <div class="answer-box">
+    <p><b>Answer:</b></p>
+    <ul>
+      <li>Time: O(m·n).</li>
+      <li>Space: Reduce from O(m·n) to O(min(m, n)) by storing only the current and previous row.</li>
+    </ul>
+  </div>
+</div>
+<div class="q-container">
+  <button class="q-btn" onclick="toggleAnswer(4)">Q5: In knapsack, why is <code>if wt[i] &lt; W:</code> incorrect and what’s an example where it fails?</button>
+  <div class="answer-box">
+    <p><b>Answer:</b> It excludes items whose weight equals capacity. Example: wt=[3], val=[40], W=3 → gives 0 instead of 40. Should be <code>&lt;=</code>.</p>
+  </div>
+</div>
+<div class="q-container">
+  <button class="q-btn" onclick="toggleAnswer(5)">Q6: For matrix dimensions [5, 10, 3, 12, 5, 50, 6], how many ways to parenthesize and why is DP better than brute force?</button>
+  <div class="answer-box">
+    <p><b>Answer:</b></p>
+    <ul>
+      <li>Ways: Catalan(5) = 42.</li>
+      <li>Brute force is exponential. DP stores optimal costs for all subchains → O(n³) time.</li>
+    </ul>
+  </div>
+</div>
+<div class="q-container">
+  <button class="q-btn" onclick="toggleAnswer(6)">Q7: How can you improve the egg drop DP from O(eggs·floors²) to O(eggs·floors·log floors)?</button>
+  <div class="answer-box">
+    <p><b>Answer:</b> Exploit monotonicity of the worst-case cost function in drop floor choice—binary search for optimal drop point instead of scanning all floors.</p>
+  </div>
+</div>
+<div class="q-container">
+  <button class="q-btn" onclick="toggleAnswer(7)">Q8: What’s the DP formulation for longest palindromic subsequence and its complexity?</button>
+  <div class="answer-box">
+    <p><b>Answer:</b></p>
+    <ul>
+      <li>dp[i][j] = LPS length in s[i..j].</li>
+      <li>If s[i]==s[j] → 2+dp[i+1][j-1], else max(dp[i+1][j], dp[i][j-1]).</li>
+      <li>Time: O(n²), Space: O(n²).</li>
+    </ul>
+  </div>
+</div>
+<div class="q-container">
+  <button class="q-btn" onclick="toggleAnswer(8)">Q9: For palindrome partitioning (minimum cuts), what should the DP state be?</button>
+  <div class="answer-box">
+    <p><b>Answer:</b> dp[i] = minimum cuts for s[0..i]. Precompute isPal[j][i]. Recurrence: If isPal[0][i] → 0 cuts, else dp[i] = min(dp[j-1]+1) for all j ≤ i where isPal[j][i] is true.</p>
+  </div>
+</div>
+
+
+
+    <script>
+        const answers = document.querySelectorAll(".answer-box");
+        const themeBtn = document.getElementById("themeBtn");
+
+        function toggleAnswer(index) {
+            answers[index].classList.toggle("active");
+        }
+
+        // Dark/Light Theme Toggle
+        themeBtn.addEventListener("click", () => {
+            if (document.body.classList.contains("dark")) {
+                document.body.classList.remove("dark");
+                document.body.classList.add("light");
+                themeBtn.textContent = "🌙 Dark Mode";
+            } else {
+                document.body.classList.remove("light");
+                document.body.classList.add("dark");
+                themeBtn.textContent = "☀️ Light Mode";
+            }
+        });
+    </script>
+</body>
+
+</html>
