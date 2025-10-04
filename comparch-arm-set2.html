@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Placement Q&A - Set 2 (ARM Basics)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            line-height: 1.6;
+            background: linear-gradient(270deg, #42a5f5, #66bb6a, #ffca28);
+            background-size: 600% 600%;
+            animation: bgAnimation 12s ease infinite;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .q-container {
+            max-width: 750px;
+            margin: 0 auto 25px auto;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .q-container:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .q-btn {
+            width: 100%;
+            padding: 14px 18px;
+            border: none;
+            background: rgba(25, 118, 210, 0.85);
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 500;
+            text-align: left;
+            transition: background 0.3s, transform 0.2s;
+            margin-bottom: 15px;
+        }
+
+        .q-btn:hover {
+            background: rgba(13, 71, 161, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .answer-box {
+            display: none;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #fff;
+            animation: fadeIn 0.5s;
+        }
+
+        .answer-box.active {
+            display: block;
+        }
+
+        body.light {
+            background: linear-gradient(270deg, #e1f5fe, #c8e6c9, #fff9c4);
+            background-size: 600% 600%;
+            animation: bgAnimationLight 12s ease infinite;
+            color: #333;
+        }
+
+        body.light h2 {
+            color: #222;
+        }
+
+        body.light .q-container {
+            background: rgba(255, 255, 255, 0.6);
+            color: #000;
+        }
+
+        body.light .answer-box {
+            background: rgba(255, 255, 255, 0.8);
+            color: #000;
+        }
+
+        body.dark {
+            background: linear-gradient(270deg, #0d47a1, #004d40, #212121);
+            background-size: 400% 400%;
+            animation: bgAnimationDark 10s ease infinite;
+            color: #eee;
+        }
+
+        body.dark h2 {
+            color: #fff;
+        }
+
+        body.dark .q-container {
+            background: rgba(30, 30, 30, 0.6);
+        }
+
+        body.dark .answer-box {
+            background: rgba(50, 50, 50, 0.8);
+        }
+
+        @keyframes bgAnimationLight {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes bgAnimationDark {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 18px;
+            background: #1976d2;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            background: #0d47a1;
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bgAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark">
+    <button class="theme-toggle" id="themeBtn">☀️ Light Mode</button>
+    <h2>Placement Q&A - Set 2 (ARM Basics)</h2>
+
+    <!-- Questions -->
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(0)">Q11: What is the difference between ARM and Thumb instructions?</button>
+        <div class="answer-box"><p><b>Answer:</b> ARM instructions are 32-bit and full-featured. Thumb instructions are 16-bit, smaller in size. Thumb reduces memory usage in small systems. ARM offers higher performance and flexibility. Modern processors can switch between both modes.</p></div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(1)">Q12: Describe the register bank of ARM processors.</button>
+        <div class="answer-box"><p><b>Answer:</b> ARM has 16 general-purpose registers (R0–R15). R13 is the Stack Pointer, R14 the Link Register, and R15 the Program Counter. The Program Status Register holds flags. Some registers are banked for different modes. This ensures efficient context switching.</p></div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(2)">Q13: What is the role of the NVIC in ARM Cortex-M?</button>
+        <div class="answer-box"><p><b>Answer:</b> NVIC means Nested Vectored Interrupt Controller. It manages interrupts in Cortex-M processors. It allows priority levels and nested interrupts. This improves real-time response. NVIC makes ARM efficient for embedded systems.</p></div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(3)">Q14: What is Pulse Width Modulation (PWM)?</button>
+        <div class="answer-box"><p><b>Answer:</b> PWM controls average power to devices. It switches power ON and OFF quickly. Duty cycle defines ON time ratio. More duty cycle means more power delivered. It is used in motors, lights, and audio control.</p></div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(4)">Q15: What is the difference between interrupts and exceptions?</button>
+        <div class="answer-box"><p><b>Answer:</b> Interrupts come from external devices like timers or UART. Exceptions come from CPU errors like divide-by-zero. Both pause normal execution and run handlers. They are stored in a vector table. This helps CPU handle events correctly.</p></div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(5)">Q16: What is Direct Memory Access (DMA)?</button>
+        <div class="answer-box"><p><b>Answer:</b> DMA transfers data between memory and peripherals. It works without CPU intervention. This makes transfers faster and reduces CPU load. The CPU can do other tasks while DMA runs. Used in high-speed data communication.</p></div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(6)">Q17: What is the role of ADC and DAC?</button>
+        <div class="answer-box"><p><b>Answer:</b> ADC converts analog signals to digital numbers. DAC converts digital values back to analog voltages. ADC is used for sensors like temperature. DAC is used in audio and motor control. They connect digital systems to the real world.</p></div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(7)">Q18: What is a bootloader?</button>
+        <div class="answer-box"><p><b>Answer:</b> A bootloader runs when the system powers on. It initializes hardware and loads the main program. It can also update firmware remotely. Bootloaders make devices easy to maintain. They are critical for embedded updates.</p></div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(8)">Q19: What is the System Control Block (SCB)?</button>
+        <div class="answer-box"><p><b>Answer:</b> SCB manages system-level ARM functions. It handles exceptions and reset operations. It supports low-power and debugging features. NVIC works closely with SCB. It is an essential block in Cortex-M cores.</p></div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(9)">Q20: What are the features of ARM Cortex-M series?</button>
+        <div class="answer-box"><p><b>Answer:</b> Cortex-M is designed for microcontrollers. It has a simple and efficient instruction set. It uses NVIC for fast interrupt handling. It supports low-power operation for IoT devices. It balances performance with cost efficiency.</p></div>
+    </div>
+
+    <script>
+        const answers = document.querySelectorAll(".answer-box");
+        const themeBtn = document.getElementById("themeBtn");
+
+        function toggleAnswer(index) {
+            answers[index].classList.toggle("active");
+        }
+
+        themeBtn.addEventListener("click", () => {
+            if (document.body.classList.contains("dark")) {
+                document.body.classList.remove("dark");
+                document.body.classList.add("light");
+                themeBtn.textContent = "🌙 Dark Mode";
+            } else {
+                document.body.classList.remove("light");
+                document.body.classList.add("dark");
+                themeBtn.textContent = "☀️ Light Mode";
+            }
+        });
+    </script>
+</body>
+</html>

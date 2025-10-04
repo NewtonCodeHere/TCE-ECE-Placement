@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Placement Q&A - Set 3 (Communication Protocols)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            line-height: 1.6;
+            background: linear-gradient(270deg, #7e57c2, #42a5f5, #26c6da);
+            background-size: 600% 600%;
+            animation: bgAnimation 12s ease infinite;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .q-container {
+            max-width: 750px;
+            margin: 0 auto 25px auto;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .q-container:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .q-btn {
+            width: 100%;
+            padding: 14px 18px;
+            border: none;
+            background: rgba(106, 27, 154, 0.85);
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 500;
+            text-align: left;
+            transition: background 0.3s, transform 0.2s;
+            margin-bottom: 15px;
+        }
+
+        .q-btn:hover {
+            background: rgba(74, 20, 140, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .answer-box {
+            display: none;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #fff;
+            animation: fadeIn 0.5s;
+        }
+
+        .answer-box.active {
+            display: block;
+        }
+
+        body.light {
+            background: linear-gradient(270deg, #ede7f6, #bbdefb, #b2ebf2);
+            background-size: 600% 600%;
+            animation: bgAnimationLight 12s ease infinite;
+            color: #333;
+        }
+
+        body.light h2 {
+            color: #222;
+        }
+
+        body.light .q-container {
+            background: rgba(255, 255, 255, 0.6);
+            color: #000;
+        }
+
+        body.light .answer-box {
+            background: rgba(255, 255, 255, 0.8);
+            color: #000;
+        }
+
+        body.dark {
+            background: linear-gradient(270deg, #311b92, #0d47a1, #004d40);
+            background-size: 400% 400%;
+            animation: bgAnimationDark 10s ease infinite;
+            color: #eee;
+        }
+
+        body.dark h2 {
+            color: #fff;
+        }
+
+        body.dark .q-container {
+            background: rgba(30, 30, 30, 0.6);
+        }
+
+        body.dark .answer-box {
+            background: rgba(50, 50, 50, 0.8);
+        }
+
+        @keyframes bgAnimationLight {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes bgAnimationDark {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 18px;
+            background: #6a1b9a;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            background: #4a148c;
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bgAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark">
+    <button class="theme-toggle" id="themeBtn">☀️ Light Mode</button>
+    <h2>Placement Q&A - Set 3 (Communication Protocols)</h2>
+
+    <!-- Questions -->
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(0)">Q21: What is UART and how does it work?</button>
+        <div class="answer-box"><p><b>Answer:</b> UART means Universal Asynchronous Receiver Transmitter. It sends and receives data serially without a clock. Data is framed with start and stop bits. It is simple and widely used for short-distance communication. Example: Serial communication in Arduino.</p></div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(1)">Q22: What is SPI communication?</button>
+        <div class="answer-box"><p><b>Answer:</b> SPI is Serial Peripheral Interface. It uses four lines: MISO, MOSI, SCK, and SS. It is faster than UART and I²C. One master can connect to many slaves. It is used for sensors, displays, and memory chips.</p></div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(2)">Q23: What is I²C and where is it used?</button>
+        <div class="answer-box"><p><b>Answer:</b> I²C is Inter-Integrated Circuit communication. It uses only two wires: SDA and SCL. It allows multiple masters and slaves. It is slower than SPI but saves pins. It is used in EEPROMs, sensors, and RTC modules.</p></div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(3)">Q24: What is the difference between UART, SPI, and I²C?</button>
+        <div class="answer-box"><p><b>Answer:</b> UART uses two wires and is asynchronous. SPI uses four wires and is faster. I²C uses two wires and supports multiple devices. UART is simple, SPI is fast, and I²C saves pins. Each is used in different applications.</p></div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(4)">Q25: What is CAN bus?</button>
+        <div class="answer-box"><p><b>Answer:</b> CAN stands for Controller Area Network. It is a robust serial protocol for automotive and industrial systems. It supports multiple nodes without a master. It has error detection and priority messaging. Example: Used in cars for ECU communication.</p></div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(5)">Q26: What is USB protocol used for?</button>
+        <div class="answer-box"><p><b>Answer:</b> USB means Universal Serial Bus. It connects peripherals like keyboards, storage, and printers. It supports plug-and-play and hot swapping. Data transfer is much faster than UART. It is widely used in computers and embedded devices.</p></div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(6)">Q27: What is the difference between synchronous and asynchronous communication?</button>
+        <div class="answer-box"><p><b>Answer:</b> Synchronous communication uses a common clock signal. Data is sent in sync with the clock. Asynchronous does not use a clock but uses start/stop bits. Synchronous is faster but complex. Asynchronous is simpler and cheaper.</p></div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(7)">Q28: What is the role of baud rate in UART?</button>
+        <div class="answer-box"><p><b>Answer:</b> Baud rate is the speed of data transfer. It defines symbols per second in UART. Example: 9600 baud means 9600 bits/sec. Both sender and receiver must match baud rate. Otherwise, data errors occur.</p></div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(8)">Q29: What is the role of parity in communication?</button>
+        <div class="answer-box"><p><b>Answer:</b> Parity is an error-checking method. It adds a bit to make data even or odd. Receiver checks parity to detect errors. It is simple but not very strong. Used in UART and old serial protocols.</p></div>
+    </div>
+
+    <div class="q-container">
+        <button class="q-btn" onclick="toggleAnswer(9)">Q30: What are protocols used in IoT devices?</button>
+        <div class="answer-box"><p><b>Answer:</b> IoT devices use MQTT, CoAP, HTTP, and Bluetooth Low Energy. MQTT is lightweight for sensors. CoAP is designed for constrained devices. HTTP is common but heavy. BLE saves energy in wearables. Choice depends on the application.</p></div>
+    </div>
+
+    <script>
+        const answers = document.querySelectorAll(".answer-box");
+        const themeBtn = document.getElementById("themeBtn");
+
+        function toggleAnswer(index) {
+            answers[index].classList.toggle("active");
+        }
+
+        themeBtn.addEventListener("click", () => {
+            if (document.body.classList.contains("dark")) {
+                document.body.classList.remove("dark");
+                document.body.classList.add("light");
+                themeBtn.textContent = "🌙 Dark Mode";
+            } else {
+                document.body.classList.remove("light");
+                document.body.classList.add("dark");
+                themeBtn.textContent = "☀️ Light Mode";
+            }
+        });
+    </script>
+</body>
+</html>

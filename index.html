@@ -31,7 +31,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient( 270deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 150, 0.7), rgba(255, 255, 200, 0.7), rgba(255, 255, 255, 0.8));
+            background: linear-gradient(270deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 150, 0.7), rgba(255, 255, 200, 0.7), rgba(255, 255, 255, 0.8));
             z-index: -1;
             background-size: 600% 600%;
             animation: gradientBG 20s ease infinite;
@@ -96,6 +96,13 @@
             letter-spacing: 1px;
         }
         
+        .button-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
         .subject-button {
             padding: 18px 35px;
             font-size: 1.3rem;
@@ -105,7 +112,6 @@
             border-radius: 10px;
             text-decoration: none;
             transition: background-color 0.3s ease, transform 0.2s ease;
-            margin: 25px 0;
             font-weight: 600;
             box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
         }
@@ -122,6 +128,7 @@
             max-width: 700px;
             line-height: 1.8;
             font-weight: 500;
+            margin-top: 25px;
         }
         /* Footer */
         
@@ -142,14 +149,17 @@
 
     <!-- Navbar -->
     <nav>
-        <div class="logo">Placement Preparation</div>
+        <div class="logo">Electronics and Communication Engineering</div>
         <div class="hamburger">&#9776;</div>
     </nav>
 
     <!-- Body -->
     <main>
         <h1>Thiagarajar College of Engineering</h1>
-        <a href="subject.html" class="subject-button">Go to Subjects</a>
+        <div class="button-container">
+            <a href="subject.html" class="subject-button">Placement Preparation</a>
+            <a href="https://practicepaper.in/gate-ec/topic-wise-practice-of-gate-ec-previous-year-papers" class="subject-button">GATE Preparation</a>
+        </div>
         <p class="motivation">✨ Believe in yourself ✨</p>
     </main>
 
@@ -162,8 +172,8 @@
     <script>
         document.addEventListener("keydown", function(event) {
             if (event.key === "Enter") {
-                // Simulate click on "Go to Subjects" button
-                document.querySelector(".subject-button").click();
+                // Simulate click on "Placement Preparation" button
+                document.querySelector(".subject-button[href='subject.html']").click();
             }
             if (event.key === "h" || event.key === "H") {
                 alert("Welcome to Placement Preparation Portal!");
